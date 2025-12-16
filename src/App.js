@@ -4,7 +4,9 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      Hello from App!
+      <header className="App-header">
+        Hello from App!
+      </header>
     </div>
   );
 }
