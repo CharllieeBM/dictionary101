@@ -5,3 +5,19 @@
   font-size: 24px;
   color: #333;
 }
+body {
+  background: #fff9f5;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+}
+
+.App {
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.App footer {
+  font-size: 12px;
+  margin: 15px 0;
+}

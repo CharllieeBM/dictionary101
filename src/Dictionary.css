@@ -1,0 +1,40 @@
+.Dictionary {
+  background: #fefcf8;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.Dictionary h1 {
+  font-family: "Pacifico", cursive;
+  color: #ff9a76;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-control {
+  flex: 1;
+  border: 2px solid #ffd8cc;
+  border-radius: 12px;
+  padding: 10px 15px;
+}
+
+.btn-search {
+  background: #ffb6a3;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-search:hover {
+  background: #ff9a76;
+}
