@@ -1,41 +1,64 @@
-import React, { useState } from "react";
-import Results from "./Results";
-import Photos from "./Photos";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dictionary.css";
 
 export default function Dictionary() {
-  const [keyword, setKeyword] = useState("sunshine");
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    // API call will go here later
-  }
-
-  function handleKeywordChange(event) {
-    setKeyword(event.target.value);
-  }
-
   return (
-    <div className="Dictionary">
-      <h1>📖 Dictionary</h1>
-      <form onSubmit={handleSubmit} className="search-form">
+    <div className="Dictionary container py-4">
+      <h1 className="text-center mb-4">📖 Dictionary</h1>
+
+      {/* Search bar */}
+      <form className="d-flex justify-content-center mb-5">
         <input
           type="search"
           placeholder="Search for a word..."
-          onChange={handleKeywordChange}
-          className="form-control"
+          className="form-control w-50 me-2 shadow-sm"
         />
-        <button type="submit" className="btn btn-search">
-          Search
-        </button>
+        <button className="btn btn-primary px-4">Search</button>
       </form>
 
-      <div className="row mt-4">
-        <div className="col-md-7">
-          <Results keyword={keyword} />
+      {/* Two-column layout */}
+      <div className="row">
+        {/* Left: Word details */}
+        <div className="col-md-6 mb-4">
+          <div className="p-4 shadow-sm rounded word-section">
+            <h2 className="word text-capitalize">serene</h2>
+            <h5 className="text-muted">/səˈriːn/</h5>
+            <p className="mt-3">
+              <strong>Meaning:</strong> Calm, peaceful, and untroubled.
+            </p>
+            <p>
+              <strong>Synonyms:</strong> tranquil, placid, relaxed
+            </p>
+
+            <div className="definitions mt-4">
+              <h5>noun</h5>
+              <p>
+                A state of being calm and free from stress — “a moment of serene
+                before the storm.”
+              </p>
+
+              <h5>adjective</h5>
+              <p>
+                Describing a person or scene that is peaceful and untroubled.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="col-md-5">
-          <Photos keyword={keyword} />
+
+        {/* Right: Related images */}
+        <div className="col-md-6">
+          <div className="row g-3">
+            {Array.from({ length: 9 }).map((_, index) => (
+              <div className="col-4" key={index}>
+                <img
+                  src={`https://source.unsplash.com/200x200/?nature,calm,${index}`}
+                  alt="related"
+                  className="img-fluid rounded shadow-sm"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

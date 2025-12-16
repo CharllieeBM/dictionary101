@@ -1,40 +1,52 @@
 .Dictionary {
-  background: #fefcf8;
+  background: linear-gradient(135deg, #fef6e4, #f8e1d4);
   border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  color: #333;
+  font-family: "Poppins", sans-serif;
+  padding-bottom: 40px;
 }
 
 .Dictionary h1 {
-  font-family: "Pacifico", cursive;
-  color: #ff9a76;
-  font-size: 40px;
-  margin-bottom: 20px;
+  font-weight: 600;
+  color: #4b4b4b;
+  letter-spacing: 1px;
 }
 
-.search-form {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.word-section {
+  background: #fffaf6;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.form-control {
-  flex: 1;
-  border: 2px solid #ffd8cc;
-  border-radius: 12px;
-  padding: 10px 15px;
+.word {
+  color: #ff7f50;
+  font-weight: 600;
 }
 
-.btn-search {
-  background: #ffb6a3;
+button.btn-primary {
+  background-color: #ffb88c;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-weight: bold;
+  color: #fff;
+  font-weight: 500;
   transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
-.btn-search:hover {
-  background: #ff9a76;
+button.btn-primary:hover {
+  background-color: #ff9a6b;
+  transform: translateY(-1px);
+}
+
+img {
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-muted {
+  color: #9c8f84 !important;
 }
