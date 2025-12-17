@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Dictionary.css";
 
 export default function Dictionary() {
@@ -19,6 +18,7 @@ export default function Dictionary() {
 
       {/* Two-column layout */}
       <div className="row">
+        ``
         {/* Left: Word details */}
         <div className="col-md-6 mb-4">
           <div className="p-4 shadow-sm rounded word-section">
@@ -45,19 +45,21 @@ export default function Dictionary() {
             </div>
           </div>
         </div>
-
         {/* Right: Related images */}
         <div className="col-md-6">
-          <div className="row g-3">
-            {Array.from({ length: 9 }).map((_, index) => (
-              <div className="col-4" key={index}>
-                <img
-                  src={`https://source.unsplash.com/200x200/?nature,calm,${index}`}
-                  alt="related"
-                  className="img-fluid rounded shadow-sm"
-                />
-              </div>
-            ))}
+          <div className="image-section">
+            <h5>Related Images</h5>
+            <div className="row g-3">
+              {Array.from({ length: 9 }).map((_, index) => (
+                <div className="col-4" key={index}>
+                  <img
+                    src={`https://source.unsplash.com/200x200/?nature,calm,${index}`}
+                    alt="related"
+                    className="img-fluid rounded shadow-sm"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
