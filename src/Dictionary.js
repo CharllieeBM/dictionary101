@@ -1,5 +1,6 @@
 import React from "react";
 import "./Dictionary.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Dictionary() {
   return (
@@ -11,55 +12,57 @@ export default function Dictionary() {
         <input
           type="search"
           placeholder="Search for a word..."
-          className="form-control w-50 me-2 shadow-sm"
+          className="form-control me-3 shadow-sm"
+          style={{ width: "60%", height: "55px", fontSize: "18px" }}
         />
-        <button className="btn btn-primary px-4">Search</button>
+        <button
+          className="btn btn-primary px-5"
+          style={{ height: "55px", fontSize: "18px" }}
+        >
+          Search
+        </button>
       </form>
 
       {/* Two-column layout */}
-      <div className="row">
-        ``
+      <div className="results-container">
         {/* Left: Word details */}
-        <div className="col-md-6 mb-4">
-          <div className="p-4 shadow-sm rounded word-section">
-            <h2 className="word text-capitalize">serene</h2>
-            <h5 className="text-muted">/səˈriːn/</h5>
-            <p className="mt-3">
-              <strong>Meaning:</strong> Calm, peaceful, and untroubled.
-            </p>
+        <div className="word-section">
+          <h2 className="word text-capitalize">serene</h2>
+          <h5 className="text-muted">/səˈriːn/</h5>
+          <p className="mt-3">
+            <strong>Meaning:</strong> Calm, peaceful, and untroubled.
+          </p>
+          <p>
+            <strong>Synonyms:</strong> tranquil, placid, relaxed
+          </p>
+
+          <div className="definitions mt-4">
+            <h5>noun</h5>
             <p>
-              <strong>Synonyms:</strong> tranquil, placid, relaxed
+              A state of being calm and free from stress — “a moment of serene
+              before the storm.”
             </p>
 
-            <div className="definitions mt-4">
-              <h5>noun</h5>
-              <p>
-                A state of being calm and free from stress — “a moment of serene
-                before the storm.”
-              </p>
-
-              <h5>adjective</h5>
-              <p>
-                Describing a person or scene that is peaceful and untroubled.
-              </p>
-            </div>
+            <h5>adjective</h5>
+            <p>Describing a person or scene that is peaceful and untroubled.</p>
           </div>
         </div>
+
         {/* Right: Related images */}
-        <div className="col-md-6">
-          <div className="image-section">
-            <h5>Related Images</h5>
-            <div className="row g-3">
-              {Array.from({ length: 9 }).map((_, index) => (
-                <div className="col-4" key={index}>
+        <div className="image-section">
+          <h5>Related Images</h5>
+          <div className="row row-cols-3 g-3">
+            {Array.from({ length: 9 }).map((_, index) => (
+              <div className="col" key={index}>
+                <div className="image-wrapper">
                   <img
-                    src={`https://source.unsplash.com/200x200/?nature,calm,${index}`}
+                    src={`https://source.unsplash.com/300x300/?nature,calm,${index}`}
                     alt="related"
-                    className="img-fluid rounded shadow-sm"
+                    className="img-fluid rounded shadow-sm uniform-img"
                   />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
