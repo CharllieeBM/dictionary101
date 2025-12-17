@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Dictionary.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
 export default function Dictionary() {
-  let [keyword, setKeyword] = useState(null);
+  let [keyword, setKeyword] = useState("");
+  let [result, setResult] = useState(null);
 
   function handleResponse(response) {
-    console.log(response.data);
+    setResult(response.data);
   }
 
   function search(event) {
     event.preventDefault();
-    let keyword = event.target.value;
     let apiKey = "d4ef035e3fbd4697b7a638t907f10o0c";
     let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
     axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleKeywordChange(event) {
+    setKeyword(event.target.value);
+  }
 
     return (
       <div className="Dictionary container py-4">
@@ -83,4 +88,4 @@ export default function Dictionary() {
       </div>
     );
   }
-}
+
