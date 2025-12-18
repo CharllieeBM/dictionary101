@@ -12,6 +12,19 @@ export default function Results(props) {
     );
   }
 
+  if (
+    data.status === "not_found" ||
+    !data.meanings ||
+    data.meanings.length === 0
+  ) {
+    return (
+      <div className="alert alert-warning text-center mt-4">
+        No results found for <strong>"{data.word}"</strong>. Please try another
+        word.
+      </div>
+    );
+  }
+
   const firstMeaning = data.meanings?.[0];
   const mainDefinition = firstMeaning?.definition || "No definition available.";
   const synonyms =
@@ -35,32 +48,31 @@ export default function Results(props) {
         </p>
 
         <div className="definitions mt-4">
-          {data.meanings &&
-            data.meanings
-              .filter((meaning) => meaning.definition) // only show those with actual definitions
-              .map((meaning, index) => (
-                <div key={index} className="mb-3">
-                  <h5>{meaning.partOfSpeech}</h5>
-                  <p>{meaning.definition}</p>
+          {data.meanings
+            .filter((meaning) => meaning.definition)
+            .map((meaning, index) => (
+              <div key={index} className="mb-3">
+                <h5>{meaning.partOfSpeech}</h5>
+                <p>{meaning.definition}</p>
 
-                  {meaning.example && (
-                    <p className="text-muted">
-                      <em>Example:</em> {meaning.example}
-                    </p>
-                  )}
+                {meaning.example && (
+                  <p className="text-muted">
+                    <em>Example:</em> {meaning.example}
+                  </p>
+                )}
 
-                  {meaning.synonyms && meaning.synonyms.length > 0 && (
-                    <p>
-                      <strong>Synonyms:</strong>{" "}
-                      {meaning.synonyms.slice(0, 5).join(", ")}
-                    </p>
-                  )}
-                </div>
-              ))}
+                {meaning.synonyms && meaning.synonyms.length > 0 && (
+                  <p>
+                    <strong>Synonyms:</strong>{" "}
+                    {meaning.synonyms.slice(0, 5).join(", ")}
+                  </p>
+                )}
+              </div>
+            ))}
         </div>
       </div>
 
-      {/* Right: Related images (keep placeholder) */}
+      {/* Right: Related images */}
       <div className="image-section">
         <h5>Related Images</h5>
         <div className="row row-cols-3 g-3">
