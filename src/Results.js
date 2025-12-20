@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import "./Results.css";
-import { Volume2 } from "lucide-react"; // or "react-icons/fa" if you prefer
-// import { FaVolumeUp } from "react-icons/fa"; // alternative icon
+import { Volume2 } from "lucide-react";
 
 export default function Results({ data }) {
   const audioRef = useRef(null);
@@ -35,51 +34,54 @@ export default function Results({ data }) {
       ? firstMeaning.synonyms.join(", ")
       : "No synonyms available.";
 
-  const audioUrl = data.phonetics?.[0]?.audio || null;
+  // ✅ audio fallback
+  const audioUrl =
+    data.phonetics?.[0]?.audio ||
+    `https://api.dictionaryapi.dev/media/pronunciations/en/${data.word}-us.mp3`;
 
   const playAudio = () => {
     if (audioRef.current) {
-      audioRef.current.play().catch(() => {
-        console.warn("Audio could not be played automatically.");
-      });
+      audioRef.current
+        .play()
+        .catch(() => console.warn("Audio could not be played automatically."));
     }
   };
 
   return (
     <div className="results-container">
       <div className="word-section">
-        <div className="d-flex align-items-center gap-2 mb-2">
-          <h2 className="word text-capitalize mb-0">{data.word}</h2>
+        {/* Word */}
+        <h2 className="word text-capitalize mb-2">{data.word}</h2>
 
-          {audioUrl && (
-            <>
-              <button
-                onClick={audioUrl ? playAudio : null}
-                disabled={!audioUrl}
-                className={`btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center ${
-                  !audioUrl ? "opacity-50" : ""
-                }`}
-                style={{
-                  width: "35px",
-                  height: "35px",
-                  padding: "0",
-                  border: "none",
-                }}
-                aria-label="Play pronunciation"
-                title={audioUrl ? "Play pronunciation" : "No audio available"}
-              >
-                <Volume2 size={20} />
-              </button>
-
-              {audioUrl && <audio ref={audioRef} src={audioUrl}></audio>}
-            </>
+        {/* Phonetic + Speaker button */}
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <button
+            onClick={audioUrl ? playAudio : null}
+            disabled={!audioUrl}
+            className={`btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center ${
+              !audioUrl ? "opacity-50" : ""
+            }`}
+            style={{
+              width: "35px",
+              height: "35px",
+              padding: "0",
+              border: "none",
+              cursor: audioUrl ? "pointer" : "not-allowed",
+            }}
+            aria-label="Play pronunciation"
+            title={audioUrl ? "Play pronunciation" : "No audio available"}
+          >
+            <Volume2 size={20} />
+          </button>
+          {data.phonetic && (
+            <h5 className="text-muted mb-0">/{data.phonetic}/</h5>
           )}
+
+
+          <audio ref={audioRef} src={audioUrl}></audio>
         </div>
 
-        {data.phonetic && (
-          <h5 className="text-muted mb-3">/{data.phonetic}/</h5>
-        )}
-
+        {/* Main meaning + synonyms */}
         <p className="mt-3">
           <strong>Meaning:</strong> {mainDefinition}
         </p>
@@ -88,6 +90,7 @@ export default function Results({ data }) {
           <strong>Synonyms:</strong> {synonyms}
         </p>
 
+        {/* All definitions */}
         <div className="definitions mt-4">
           {data.meanings
             .filter((meaning) => meaning.definition)
@@ -113,7 +116,7 @@ export default function Results({ data }) {
         </div>
       </div>
 
-      {/* Right: Related images */}
+      {/* Right: Related images (placeholder) */}
       <div className="image-section">
         <h5>Related Images</h5>
         <div className="row row-cols-3 g-3">
