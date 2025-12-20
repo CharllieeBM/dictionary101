@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Results.css";
+import { Volume2 } from "lucide-react"; // or "react-icons/fa" if you prefer
+// import { FaVolumeUp } from "react-icons/fa"; // alternative icon
 
-export default function Results(props) {
-  const { data } = props;
+export default function Results({ data }) {
+  const audioRef = useRef(null);
 
   if (!data || !data.word) {
     return (
-      <div className="text-center text-muted">
+      <div className="text-center text-muted mt-4">
         Type a word and press search to begin.
       </div>
     );
@@ -15,6 +17,7 @@ export default function Results(props) {
   if (
     data.status === "not_found" ||
     !data.meanings ||
+    !Array.isArray(data.meanings) ||
     data.meanings.length === 0
   ) {
     return (
@@ -25,19 +28,57 @@ export default function Results(props) {
     );
   }
 
-  const firstMeaning = data.meanings?.[0];
+  const firstMeaning = data.meanings[0];
   const mainDefinition = firstMeaning?.definition || "No definition available.";
   const synonyms =
     firstMeaning?.synonyms?.length > 0
       ? firstMeaning.synonyms.join(", ")
       : "No synonyms available.";
 
+  const audioUrl = data.phonetics?.[0]?.audio || null;
+
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch(() => {
+        console.warn("Audio could not be played automatically.");
+      });
+    }
+  };
+
   return (
     <div className="results-container">
-      {/* Left: Word details */}
       <div className="word-section">
-        <h2 className="word text-capitalize">{data.word}</h2>
-        {data.phonetic && <h5 className="text-muted">/{data.phonetic}/</h5>}
+        <div className="d-flex align-items-center gap-2 mb-2">
+          <h2 className="word text-capitalize mb-0">{data.word}</h2>
+
+          {audioUrl && (
+            <>
+              <button
+                onClick={audioUrl ? playAudio : null}
+                disabled={!audioUrl}
+                className={`btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center ${
+                  !audioUrl ? "opacity-50" : ""
+                }`}
+                style={{
+                  width: "35px",
+                  height: "35px",
+                  padding: "0",
+                  border: "none",
+                }}
+                aria-label="Play pronunciation"
+                title={audioUrl ? "Play pronunciation" : "No audio available"}
+              >
+                <Volume2 size={20} />
+              </button>
+
+              {audioUrl && <audio ref={audioRef} src={audioUrl}></audio>}
+            </>
+          )}
+        </div>
+
+        {data.phonetic && (
+          <h5 className="text-muted mb-3">/{data.phonetic}/</h5>
+        )}
 
         <p className="mt-3">
           <strong>Meaning:</strong> {mainDefinition}
