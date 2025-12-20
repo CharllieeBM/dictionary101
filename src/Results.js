@@ -77,7 +77,6 @@ export default function Results({ data }) {
             <h5 className="text-muted mb-0">/{data.phonetic}/</h5>
           )}
 
-
           <audio ref={audioRef} src={audioUrl}></audio>
         </div>
 
@@ -113,24 +112,6 @@ export default function Results({ data }) {
                 )}
               </div>
             ))}
-        </div>
-      </div>
-
-      {/* Right: Related images (placeholder) */}
-      <div className="image-section">
-        <h5>Related Images</h5>
-        <div className="row row-cols-3 g-3">
-          {Array.from({ length: 9 }).map((_, index) => (
-            <div className="col" key={index}>
-              <div className="image-wrapper">
-                <img
-                  src={`https://source.unsplash.com/300x300/?nature,calm,${index}`}
-                  alt="related"
-                  className="img-fluid rounded shadow-sm uniform-img"
-                />
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>
