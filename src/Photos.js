@@ -1,16 +1,20 @@
 import React from "react";
 import "./Photos.css";
 
-export default function Photos(props) {
+export default function Photos({ photos, keyword }) {
+  if (!photos || photos.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="Photos">
-      <h3>Images related to "{props.keyword}"</h3>
+    <div className="Photos mt-4">
+      <h3>Images related to "{keyword}"</h3>
       <div className="row mt-3">
-        {[...Array(9)].map((_, index) => (
+        {photos.map((photo, index) => (
           <div className="col-4 mb-3" key={index}>
             <img
-              src={`https://source.unsplash.com/160x160/?${props.keyword}&sig=${index}`}
-              alt={props.keyword}
+              src={photo.src.landscape}
+              alt={photo.alt}
               className="img-fluid rounded shadow-sm"
             />
           </div>
